@@ -1,19 +1,37 @@
-provider "aws" {
-  region = "us-east-1"
+resource "aws_vpc" "netology-vpc" {
+  cidr_block = "172.31.0.0/16"
+
+  tags = {
+    Name = "netology-vpc"
+  }
 }
 
-data "aws_ami" "amazon-linux" {
-  most_recent = true
+resource "aws_security_group" "netology-sg" {
+  name   = "netology-sg"
+  vpc_id = aws_vpc.netology-vpc.id
 
-  filter {
-    name   = "name"
-    values = ["amzn2-ami-hvm-2.0.*-x86_64-gp2"]
+  egress {
+    protocol    = -1
+    from_port   = 0
+    to_port     = 0
+    cidr_blocks = ["0.0.0.0/0"]
   }
+}
 
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
+resource "aws_security_group_rule" "ssh" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.netology-sg.id
+}
 
-  owners = ["137112412989"] # Amazon
+resource "aws_security_group_rule" "icmp" {
+  type              = "ingress"
+  from_port         = -1
+  to_port           = -1
+  protocol          = "icmp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.netology-sg.id
 }
