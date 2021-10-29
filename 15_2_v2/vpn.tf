@@ -13,7 +13,7 @@ resource "aws_acm_certificate" "vpn_client_cert" {
 resource "aws_ec2_client_vpn_endpoint" "vpn-ep" {
   description            = "vpn-ep"
   server_certificate_arn = aws_acm_certificate.vpn_server_cert.arn
-  client_cidr_block      = "10.0.0.0/22"
+  client_cidr_block      = "192.168.0.0/22"
   split_tunnel = true
 
   authentication_options {

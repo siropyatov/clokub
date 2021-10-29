@@ -24,11 +24,3 @@ data "aws_s3_bucket_object" "img" {
   bucket = aws_s3_bucket.b.id
   key    = aws_s3_bucket_object.img.id
 }
-
-# output "s3_bucket" {
-#   value = data.aws_s3_bucket.b
-# }
-
-# output "s3_object" {
-#   value = data.aws_s3_bucket_object.img
-# }
