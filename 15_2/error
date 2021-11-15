@@ -1,0 +1,16 @@
+╷
+│ Error: Error creating launch configuration: ValidationError: No default VPC for this user. GroupName is only supported for EC2-Classic and default VPC.
+│       status code: 400, request id: 249003c1-4aa3-4880-8c70-a5c8847b23fd
+│
+│   with aws_launch_configuration.as_conf,
+│   on Autoscaling.tf line 18, in resource "aws_launch_configuration" "as_conf":
+│   18: resource "aws_launch_configuration" "as_conf" {
+│
+╵
+╷
+│ Error: Error import KeyPair: InvalidKeyPair.Duplicate: The keypair 'aws-key' already exists.
+│       status code: 400, request id: 8c84d2aa-4966-465c-b322-50901fa60c0b
+│
+│   with aws_key_pair.aws-key,
+│   on instances.tf line 31, in resource "aws_key_pair" "aws-key":
+│   31: resource "aws_key_pair" "aws-key" {
